@@ -1,18 +1,22 @@
 library(tidyverse)
 
-# click SOURCE to get your corona workout of today printed out for you
+# click SOURCE to get today's corona workout printed out for you!
 
 game_set <- tibble(
   square = 1:25,
   instruction = c(
     "planc", "upward bridge", "superman",
     "lunges","jumping jacks", "lateral squats",
-    "REPEAT", "mountain climbers", "sumo squats",
+    "REPEAT", # square 7
+    "mountain climbers", "sumo squats",
     "jumping rope", "lateral planc", "dips",
-    "push ups", "GO BACK 3 STEPS", "squats",
+    "push ups", "GO BACK 3 STEPS", # square 14
+    "squats",
     "chair stand", "donkey kicks", "jumping squats",
-    "RESTART", "burpees", "v planc",
-    "squats", "GO BACK 2 STEPS", "stationary running", "chair stand"
+    "RESTART", # square 19
+    "burpees", "v planc",
+    "squats", "GO BACK 2 STEPS", # square 23
+    "stationary running", "chair stand"
   ),
   time = c(
     "1 min", "12 rep", "30 s",
@@ -25,8 +29,7 @@ game_set <- tibble(
     "20 rep", NA, "30 s", "30 s"
   )
 )
-
-game_set
+# game_set
 
 game_now <- tibble()
 cumul_step <- 0
@@ -34,9 +37,19 @@ while( cumul_step < 25 ) {
   dice_roll <- sample(1:6, 1)
   cumul_step <- sum(cumul_step, dice_roll)
   
-  if(cumul_step > 25) {
+  if(cumul_step == 25) {
+    print(cumul_step)
+    #
+    cat("You are finished for today. Come back tomorrow!")
     break()
-  } else { print(cumul_step) }
+  }
+  else if(cumul_step > 25) {
+    cat("You are finished for today. Come back tomorrow!")
+    break()
+  } else { 
+    print(cumul_step) 
+    #
+  }
   
   #game_now <- bind_rows(game_now, )
 }
