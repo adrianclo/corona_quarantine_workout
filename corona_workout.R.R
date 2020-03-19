@@ -1,5 +1,7 @@
 library(tidyverse)
 
+# click SOURCE to get your corona workout of today printed out for you
+
 game_set <- tibble(
   square = 1:25,
   instruction = c(
