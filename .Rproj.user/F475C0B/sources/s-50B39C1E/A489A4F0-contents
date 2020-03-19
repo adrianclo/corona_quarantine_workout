@@ -37,19 +37,30 @@ while( cumul_step < 25 ) {
   dice_roll <- sample(1:6, 1)
   cumul_step <- sum(cumul_step, dice_roll)
   
-  if(cumul_step == 25) {
-    print(cumul_step)
-    #
+  print(cumul_step)
+  
+  if(cumul_step == 7) {
+    game_now <- bind_rows(game_now, tail(game_now, 1))
+  } else if(cumul_step == 14) {
+    game_now <- bind_rows(game_now, slice(game_set, 11))
+    cumul_step <- 11
+  } else if(cumul_step == 19) {
+    game_now <- bind_rows(game_now, slice(game_set, 1))
+    cumul_step <- 1
+  } else if(cumul_step == 23) { 
+    game_now <- bind_rows(game_now, slice(game_set, 21))
+    cumul_step <- 21
+  } else if(cumul_step == 25) {
+    game_now <- bind_rows(game_now, slice(game_set, cumul_step))
     cat("You are finished for today. Come back tomorrow!")
     break()
   }
   else if(cumul_step > 25) {
     cat("You are finished for today. Come back tomorrow!")
     break()
-  } else { 
-    print(cumul_step) 
-    #
-  }
-  
-  #game_now <- bind_rows(game_now, )
+  } else {
+    game_now <- bind_rows(game_now, slice(game_set, cumul_step))
+  } 
 }
+
+game_now
