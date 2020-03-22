@@ -63,4 +63,5 @@ while( cumul_step < 25 ) {
   } 
 }
 
+game_now <- game_now %>% select(-square)
 game_now

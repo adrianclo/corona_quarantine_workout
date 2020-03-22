@@ -1,0 +1,25 @@
+{
+    "collab_server" : "",
+    "contents" : "",
+    "created" : 1584800696680.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "525376779",
+    "id" : "98762921",
+    "lastKnownWriteTime" : 1584886465,
+    "last_content_update" : 1584886465003,
+    "path" : "~/Documents/GitHub/corona_workout/corona_workout.R",
+    "project_path" : "corona_workout.R",
+    "properties" : {
+        "cursorPosition" : "65,32",
+        "scrollLine" : "58"
+    },
+    "read_only" : false,
+    "read_only_alternatives" : [
+    ],
+    "relative_order" : 1,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "r_source"
+}
