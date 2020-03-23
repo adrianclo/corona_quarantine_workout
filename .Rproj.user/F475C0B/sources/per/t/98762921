@@ -5,15 +5,15 @@
     "dirty" : false,
     "encoding" : "UTF-8",
     "folds" : "",
-    "hash" : "525376779",
+    "hash" : "945772269",
     "id" : "98762921",
-    "lastKnownWriteTime" : 1584886465,
-    "last_content_update" : 1584886465003,
+    "lastKnownWriteTime" : 1584985966,
+    "last_content_update" : 1584985966202,
     "path" : "~/Documents/GitHub/corona_workout/corona_workout.R",
     "project_path" : "corona_workout.R",
     "properties" : {
-        "cursorPosition" : "65,32",
-        "scrollLine" : "58"
+        "cursorPosition" : "8,19",
+        "scrollLine" : "0"
     },
     "read_only" : false,
     "read_only_alternatives" : [
