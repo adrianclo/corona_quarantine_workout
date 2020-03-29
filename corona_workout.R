@@ -2,37 +2,40 @@ library(tidyverse)
 
 # extra settings
 jumping_rope <- F # keep jumping rope?
-extra_hard <- T # >25 are counted backwards, and workout is finished once landing exactly on 25
+extra_hard <- F # >25 are counted backwards, and workout is finished once landing exactly on 25
 
 # click SOURCE to get today's corona workout printed out for you!
 
-game_set <- tibble(
-  square = 1:25,
-  instruction = c(
-    "planc", "upward bridge", "superman",
-    "lunges","jumping jacks", "lateral squats",
-    "REPEAT", # square 7
-    "mountain climbers", "sumo squats",
-    "jumping rope", "lateral planc", "dips",
-    "push ups", "GO BACK 3 STEPS", # square 14
-    "squats",
-    "chair stand", "donkey kicks", "jumping squats",
-    "RESTART", # square 19
-    "burpees", "v planc",
-    "squats", "GO BACK 2 STEPS", # square 23
-    "stationary running", "chair stand"
-  ),
-  time = c(
-    "1 min", "12 rep", "30 s",
-    "10 rep per leg", "30 s", "10 rep per leg",
-    NA, "30 s", "12 rep",
-    "30 s", "30 s per side", "10 rep",
-    "8 rep", NA, "15 rep",
-    "30 s", "10 rep per leg", "8 rep",
-    NA, "8 rep", "30 s",
-    "20 rep", NA, "30 s", "30 s"
-  )
-)
+game_set <- matrix(c(
+  # square instruction set rep unit extra
+  "1",  "planc",              "1", "1", "min",  NA,
+  "2",  "upward bridge",      "1", "10", "rep", NA,
+  "3",  "superman",           "1", "30", "s",   NA,
+  "4",  "lunges",             "1", "10", "rep", "per leg",
+  "5",  "jumping jacks",      "1", "30", "s", NA,
+  "6",  "lateral squats",     "1", "30", "s", "per side",
+  "7",  "REPEAT", NA,NA,NA,NA, 
+  "8",  "mountain climbers",  "1", "30", "s", NA,
+  "9",  "sumo squats",        "1", "12", "rep", NA,
+  "10", "jumping ropes",      "1", "30", "s", NA,
+  "11", "lateral planc",      "1", "30", "s", "per side",
+  "12", "dips",               "1", "10", "rep", NA,
+  "13", "push ups",           "1", "8", "rep", NA,
+  "14", "GO BACK 3 STEPS", NA,NA,NA,NA,
+  "15", "squats",             "1", "15", "rep", NA,
+  "16", "chair stand",        "1", "30", "s", NA,
+  "17", "donkey kicks",       "1", "10", "rep", "per leg",
+  "18", "jumping squats",     "1", "8", "rep", NA,
+  "19", "RESTART", NA,NA,NA,NA,
+  "20", "burpees",            "1", "8", "rep", NA,
+  "21", "v planc",            "1", "30", "s", NA,
+  "22", "squats",             "1", "20", "rep", NA,
+  "23", "GO BACK 2 STEPS", NA,NA,NA,NA,
+  "24", "stationary running", "1", "30", "s", NA,
+  "25", "chair stand",        "1", "30", "s", NA
+  ), nrow = 25, byrow = T)
+colnames(game_set) <- c("square", "instruction", "set", "time", "unit", "extra")
+game_set <- as_tibble(game_set)
 
 if(!jumping_rope) game_set[10,2] <- "stationary running"
 # game_set
