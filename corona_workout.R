@@ -8,15 +8,15 @@ set <- 1
 
 # extra settings
 sensitive_neighbour <- T # replace all jumping activities with quiet ones
+level <- "hard"          # easy - medium - hard
 extra_hard <- F          # >25 are counted backwards, and workout is finished once landing exactly on 25
-level <- "easy"          # easy - medium - hard
 
 # click SOURCE to get today's corona workout printed out for you!
 
 game_list <- list(
   full_work_out = tibble::tribble(
     ~square, ~instruction,     ~set, ~rep, ~unit, ~extra,
-    "1",  "planc",              "1", "1",  "min", NA,
+    "1",  "planc",              "1", "60", "s", NA,
     "2",  "upward bridge",      "1", "10", "rep", NA,
     "3",  "superman",           "1", "30", "s",   NA,
     "4",  "lunges",             "1", "10", "rep", "per leg",
@@ -48,7 +48,7 @@ game_list <- list(
 
 game <- game_list[[set]]
 
-if(sensitive_neighbour & set == 1) {
+if(set == 1 & sensitive_neighbour) {
   game[5,2] <- "superman"
   game[8,c(2,4,5)] <- c("push ups", 20, "rep")
   game[10,c(2,5)] <- c("lateral planc", "per side")
@@ -56,6 +56,26 @@ if(sensitive_neighbour & set == 1) {
   game[20,2] <- "push ups"
   game[24,2] <- "planc"
 }
+
+if(set == 1 & level == "easy") {
+  game <- game
+} else if(set == 1 & level == "medium") {
+  set_index <- sample(1:2, size = 25, replace = T, prob = c(.30, .70))
+  ww <- which(is.na(game$set))
+  if(length(ww) > 0) { set_index[c(7,14,19,23)] <- NA }
+  game$set <- set_index
+} else if(set == 1 & level == "hard") {
+  set_index <- sample(1:3, size = 25, replace = T, prob = c(.10, .40, .50))
+  ww <- which(is.na(game$set))
+  if(length(ww) > 0) { set_index[c(7,14,19,23)] <- NA }
+  game$set <- set_index
+  
+  game <- game %>% 
+    mutate(rep = as.numeric(rep)) %>% 
+    mutate(rep = rep + sample(seq(0,20, by = 5), 
+                              size = 1, 
+                              prob = c(.05, .15, .20, .25, .35)))
+} else { stop("Your level does not exist..")}
 # game
 
 if(set == 1) {
@@ -122,7 +142,7 @@ if(set == 1) {
 
 game_now <- game_now %>% select(-square)
 
-if(nrow(game_now) == 10) {
+if(nrow(game_now) <= 10) {
   game_now
 } else {
   game_now %>% as.data.frame()
