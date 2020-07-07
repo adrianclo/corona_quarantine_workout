@@ -50,8 +50,11 @@ game <- game_list[[set]]
 
 if(set == 1 & sensitive_neighbour) {
   game[5,2] <- "superman"
-  game[8,c(2,4,5)] <- c("push ups", 20, "rep")
-  game[10,c(2,5)] <- c("lateral planc", "per side")
+  game[8,2] <- "push ups"
+  game[8,4] <- 20
+  game[8,5] <- "rep"
+  game[10,2] <- "lateral planc"
+  game[10,5] <- "per side"
   game[18,2] <- "push ups"
   game[20,2] <- "push ups"
   game[24,2] <- "planc"
