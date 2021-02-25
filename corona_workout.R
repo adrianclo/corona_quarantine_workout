@@ -42,8 +42,34 @@ game_list <- list(
     "24", "stationary running", "1", "30", "s",   NA,
     "25", "chair stand",        "1", "30", "s",   NA
   ),
-  planc = tibble::tribble(),
-  chair = tibble::tribble()
+  planc = tibble::tribble(
+    ~square, ~instruction,             ~set, ~rep, ~unit, ~extra,
+    "1",     "standard",               "1",  "20", "s",   NA,
+    "2",     "extended arms",          "1",  "30", "s",   NA,
+    "3",     "standard alternate arm",     "1",  "20", "s",   NA,
+    "4",     "standard",               "1",  "30", "s",   NA,
+    "5",     "left side extended arm", "1",  "30", "s",   NA,
+    "6",     "extended arms",          "1",  "60", "s",   NA,
+    "7",     "RESTART",NA,NA,NA,NA,
+    "8",     "standard",               "1",  "45", "s",   NA,
+    "9",     "right side",             "1",  "30", "s",   NA,
+    "10",    "standard alternate leg", "1",  "30", "s",   NA,
+    "11",    "opposite extended",      "1",  "20", "s",   NA,
+    "12",    "REPEAT",NA,NA,NA,NA,
+    "13",    "standard alternate arm",      "1",  "30", "s",   NA,
+    "14",    "right side extended arm","1",  "30", "s",   NA,
+    "15",    "GO FORWARD 2 STEPS",NA,NA,NA,NA,
+    "16",    "right side extended arm left leg up","1","20","s",NA,
+    "17",    "opposite standard",      "1",  "20", "s", NA,
+    "18",    "standard",               "1", "60", "s", NA,
+    "19",    "extended alternate arm and leg", "1", "30", "s", NA,
+    "20",    "right side left leg up", "1", "30", "s", NA,
+    "21",    "GO BACK 3 STEPS", NA,NA,NA,NA,
+    "22",    "standard alternate leg", "1", "45", "s", NA,
+    "23",    "standard", "1", "60", "s", NA,
+    "24",    "left side extended arm right leg up", "1","30", "s", NA,
+    "25",    "extended alternate arm and leg", "1", "45", "s", NA
+  )
 )
 
 game <- game_list[[set]]
@@ -60,7 +86,7 @@ if(set == 1 & sensitive_neighbour) {
   game[24,2] <- "planc"
 }
 
-if(set == 1 & level == "easy") {
+if((set == 1 & level == "easy") | set == 2) {
   game <- game
 } else if(set == 1 & level == "medium") {
   set_index <- sample(1:2, size = 25, replace = T, prob = c(.30, .70))
@@ -138,9 +164,22 @@ if(set == 1) {
     }
   }
 } else if(set == 2) {
-  
-} else if(set == 3) {
-  
+  game_now <- tibble()
+  cumul_step <- 0
+  while( cumul_step < 25 ) {
+    dice_roll <- sample(1:6, 1)
+    cumul_step <- sum(cumul_step, dice_roll)
+    
+    print(cumul_step)
+    if(cumul_step == 7) {
+      game_now <- bind_rows(game_now, slice(game, 1))
+      cumul_step <- 1
+    } else if(cumul_step == 12) {
+      game_now <- bind_rows(game_now, tail(game_now, 1))
+    } else if(...) {
+      # IN PROGRESS 
+    }
+  }
 } else { stop("Your exercise set does not exist..") }
 
 game_now <- game_now %>% select(-square)

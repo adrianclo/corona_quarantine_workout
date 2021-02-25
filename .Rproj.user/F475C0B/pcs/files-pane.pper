@@ -1,9 +1,9 @@
 {
-    "path" : "~/Documents/GitHub/corona_workout",
-    "sortOrder" : [
+    "path": "~/Documents/GitHub/corona_workout",
+    "sortOrder": [
         {
-            "ascending" : true,
-            "columnIndex" : 2
+            "columnIndex": 2,
+            "ascending": true
         }
     ]
 }
