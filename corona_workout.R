@@ -4,7 +4,7 @@ library(tibble)
 #' (1) full work out
 #' (2) planc variants
 #' (3) chair and squats
-set <- 1
+set <- 2
 
 # extra settings
 sensitive_neighbour <- T # replace all jumping activities with quiet ones
@@ -176,8 +176,14 @@ if(set == 1) {
       cumul_step <- 1
     } else if(cumul_step == 12) {
       game_now <- bind_rows(game_now, tail(game_now, 1))
-    } else if(...) {
-      # IN PROGRESS 
+    } else if(cumul_step == 15) {
+      game_now <- bind_rows(game_now, slice(game, 17))
+      cumuL_step <- 17
+    } else if(cumul_step == 21) {
+      game_now <- bind_rows(game_now, slice(game, 18))
+      cumuL_step <- 18
+    } else {
+      game_now <- bind_rows(game_now, slice(game, cumul_step))
     }
   }
 } else { stop("Your exercise set does not exist..") }
